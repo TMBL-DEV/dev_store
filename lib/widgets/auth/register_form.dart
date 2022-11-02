@@ -19,8 +19,8 @@ class RegisterFormState extends State<RegisterForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<RegisterFormState>.
   final _formKey = GlobalKey<FormState>();
-  String email = "";
-  String password = "";
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RegisterFormState extends State<RegisterForm> {
         children: [
           RichText(
             text: const TextSpan(
-              text: "Register",
+              text: 'Register',
               style: TextStyle(fontSize: 29, color: Colors.black),
             ),
           ),
@@ -42,7 +42,7 @@ class RegisterFormState extends State<RegisterForm> {
           TextFormField(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              labelText: "Enter email",
+              labelText: 'Enter email',
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -59,7 +59,7 @@ class RegisterFormState extends State<RegisterForm> {
           TextFormField(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              labelText: "Enter Password",
+              labelText: 'Enter Password',
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -81,8 +81,8 @@ class RegisterFormState extends State<RegisterForm> {
                   String result = await AuthenticationService.instance
                       .register(email, password);
 
-                  if (result == "success") {
-                    result = "logged in";
+                  if (result == 'success') {
+                    result = 'logged in';
                   }
                   // If the form is valid, display a snackbar. In the real world,
                   // you'd often call a server or save the information in a database.

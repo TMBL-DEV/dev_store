@@ -30,9 +30,9 @@ class AuthenticationService {
       return e.code;
     } catch (e) {
       print(e);
-      return "something went wrong";
+      return 'something went wrong';
     }
-    return "success";
+    return 'success';
   }
 
   Future<String> login(String email, String password) async {
@@ -44,8 +44,8 @@ class AuthenticationService {
     } on FirebaseAuthException catch (e) {
       return e.code;
     } catch (e) {
-      return "something went wrong";
+      return 'something went wrong';
     }
-    return "success";
+    return 'success';
   }
 }
