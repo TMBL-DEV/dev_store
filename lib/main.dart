@@ -1,7 +1,10 @@
+import 'package:dev_store/models/hive/hive_product.dart';
 import 'package:dev_store/screens/auth/auth_page.dart';
 import 'package:dev_store/screens/customer/main_page.dart';
+import 'package:dev_store/screens/customer/product_show.dart';
 import 'package:dev_store/screens/my_home_page.dart';
 import 'package:dev_store/screens/supplier/main_page.dart';
+import 'package:dev_store/services/cart_service.dart';
 import 'package:dev_store/services/experience_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +19,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
+  Hive.registerAdapter(HiveProductAdapter());
   await ExperienceService.instance.openBox();
+  await CartService.instance.openBox();
 
   String experience = ExperienceService().retrieveExperience();
   if (experience != 'empty') {
@@ -31,6 +36,7 @@ void main() async {
         '/customer': (context) => const CustomerMainPage(),
         '/supplier': (context) => const SupplierMainPage(),
         '/auth': (context) => const AuthPage(),
+        '/product': (context) => const ProductShowPage(),
       },
     ),
   );

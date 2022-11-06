@@ -1,10 +1,9 @@
+import 'package:dev_store/screens/customer/cart_screen.dart';
 import 'package:dev_store/screens/customer/home_screen.dart';
 import 'package:dev_store/screens/customer/profile_screen.dart';
 import 'package:dev_store/widgets/appbar.dart';
 import 'package:dev_store/widgets/default_page_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CustomerMainPage extends StatefulWidget {
   const CustomerMainPage({super.key});
@@ -16,10 +15,9 @@ class CustomerMainPage extends StatefulWidget {
 class _CustomerMainPageState extends State<CustomerMainPage> {
   int _selectedIndex = 0;
   final List<Widget?> tabs = [
-    HomeScreen(),
-    Container(
-      child: Text('cart'),
-    ),
+    const HomeScreen(),
+    const Text('suppliers'),
+    const CartScreen(),
     const ProfileScreen()
   ];
 

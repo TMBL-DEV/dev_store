@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:dev_store/models/product.dart';
+import 'package:dev_store/widgets/customer/product_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,24 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return ListView(
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            String placeHolder = "https://placekitten.com/200/300";
-
-            Map<String, dynamic> data =
-                document.data()! as Map<String, dynamic>;
-
-            List pictures = data['imagePaths'];
-            final storageRef =
-                FirebaseStorage.instance.ref().child(pictures[0]);
-            // .child(pictures[0]);
-
-            // storageRef.getDownloadURL().then((value) {
-            //   var pauze = true;
-            // });
-
-            return ListTile(
-              title: Text(data['name']),
-              subtitle: Text(data['description']),
-              leading: Image.network(placeHolder),
+            return ProductListItem(
+              Product.fromDocumentSnapshot(document),
+              buyable: true,
             );
           }).toList(),
         );
