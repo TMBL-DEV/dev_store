@@ -1,3 +1,4 @@
+import 'package:dev_store/screens/customer/home_screen.dart';
 import 'package:dev_store/screens/customer/profile_screen.dart';
 import 'package:dev_store/widgets/appbar.dart';
 import 'package:dev_store/widgets/default_page_container.dart';
@@ -15,8 +16,9 @@ class CustomerMainPage extends StatefulWidget {
 class _CustomerMainPageState extends State<CustomerMainPage> {
   int _selectedIndex = 0;
   final List<Widget?> tabs = [
+    HomeScreen(),
     Container(
-      child: Text('aa'),
+      child: Text('cart'),
     ),
     const ProfileScreen()
   ];
@@ -36,7 +38,15 @@ class _CustomerMainPageState extends State<CustomerMainPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.home),
+            label: 'suppliers',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
