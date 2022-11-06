@@ -40,8 +40,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   firebase_storage: ^11.0.3
-  cached_network_ima: ^3.2.2
-  gecarousel_slider: ^4.1.1
+  carousel_slider: ^4.1.1
   carousel_indicator: ^1.0.6
 
 dev_dependencies:
