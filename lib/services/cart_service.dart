@@ -29,13 +29,12 @@ class CartService {
 
     box.put(
       product.getId(),
-      HiveProduct(
-        product.getId(),
-        name: product.name,
-        description: product.description,
-        imagePaths: product.imagePaths,
-        amountInCart: amountInCart,
-      ),
+      HiveProduct(product.getId(),
+          name: product.name,
+          description: product.description,
+          imagePaths: product.imagePaths,
+          amountInCart: amountInCart,
+          basePrice: product.basePrice),
     );
   }
 

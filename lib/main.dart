@@ -30,6 +30,11 @@ void main() async {
 
   runApp(
     MaterialApp(
+      title: 'DevStore 🔥',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        useMaterial3: true,
+      ),
       initialRoute: initalRoute,
       routes: {
         '/welcome': (context) => const MyHomePage(),

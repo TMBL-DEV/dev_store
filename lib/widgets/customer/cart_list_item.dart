@@ -60,9 +60,12 @@ class _CartListItemState extends State<CartListItem> {
               Icons.cancel_outlined,
               color: Colors.red,
             ),
-            onTap: () => CartService().remove(product.getId()),
+            onTap: () {
+              changeAmountToOrder(product.getId(),
+                  -(CartService().box.get(product.getId())?.amountInCart ?? 0));
+            },
           ),
-          Text('€ ${CartService().getTotalPrice(product.getId())}')
+          Text('€ ${product.basePrice}')
         ],
       ),
     );

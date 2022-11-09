@@ -25,7 +25,7 @@ class _ProductListItemState extends State<ProductListItem> {
 
   void addToCart(Product product) {
     const snackBar = SnackBar(
-      content: Text('added to'),
+      content: Text('added to cart'),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -38,25 +38,32 @@ class _ProductListItemState extends State<ProductListItem> {
     bool buyable = widget.buyable;
 
     return ListTile(
-        title: Text(product.name),
-        subtitle: Text(product.description, maxLines: 1),
-        leading: productImage,
-        onTap: () => showProduct(product),
-        trailing: buyable
-            ? InkWell(
-                child: const Icon(
-                  Icons.add_box_rounded,
-                  color: Colors.green,
+      title: Text(product.name),
+      subtitle: Text(product.description, maxLines: 1),
+      leading: productImage,
+      onTap: () => showProduct(product),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          buyable
+              ? InkWell(
+                  child: const Icon(
+                    Icons.add_box_rounded,
+                    color: Colors.green,
+                  ),
+                  onTap: () => addToCart(product),
+                )
+              : InkWell(
+                  child: const Icon(
+                    Icons.add_box_rounded,
+                    color: Colors.grey,
+                  ),
+                  onTap: () => null,
                 ),
-                onTap: () => addToCart(product),
-              )
-            : InkWell(
-                child: const Icon(
-                  Icons.add_box_rounded,
-                  color: Colors.grey,
-                ),
-                onTap: () => null,
-              ));
+          Text("€${product.basePrice}")
+        ],
+      ),
+    );
   }
 
   void showProduct(Product product) {

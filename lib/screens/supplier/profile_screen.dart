@@ -1,8 +1,6 @@
 import 'package:dev_store/services/experience_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -32,41 +30,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
     authStateCheck();
     if (loggedIn) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Email: "),
+              Text(authUser.email ?? "no email"),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("verified email: "),
+              Text(authUser.emailVerified ? "Verified" : "Not Verified"),
+            ],
+          ),
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Email: "),
-                    Text(authUser.email ?? "no email"),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("verified email: "),
-                    Text(authUser.emailVerified ? "Verified" : "Not Verified"),
-                  ],
+                ElevatedButton(
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  onPressed: () {
+                    ExperienceService.instance.setExperience('/customer');
+                    Navigator.pushReplacementNamed(context, '/customer');
+                  },
+                  child: const Text(
+                    'Switch to Customer Experience',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ],
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-            onPressed: () {
-              ExperienceService.instance.setExperience('/supplier');
-              Navigator.pushReplacementNamed(context, '/supplier');
-            },
-            child: const Text(
-              'Switch to Supplier Experience',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
+          )
         ],
       );
     } else {

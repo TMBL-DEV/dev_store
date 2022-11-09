@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:hive/hive.dart';
 part 'hive_product.g.dart';
 
@@ -15,12 +13,15 @@ class HiveProduct extends HiveObject {
   final List<String> imagePaths;
   @HiveField(4)
   int amountInCart;
+  @HiveField(5)
+  double? basePrice;
 
   HiveProduct(
     this._id, {
     required this.name,
     required this.description,
     required this.imagePaths,
+    required this.basePrice,
     this.amountInCart = 1,
   });
 

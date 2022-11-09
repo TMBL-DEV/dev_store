@@ -7,12 +7,14 @@ class Product {
   String name;
   String description;
   List<String> imagePaths;
+  double basePrice;
 
   Product(
     this._id, {
     required this.name,
     required this.description,
     required this.imagePaths,
+    required this.basePrice,
   });
 
   String getId() {
@@ -27,6 +29,7 @@ class Product {
       name: snapshot.get('name'),
       description: snapshot.get('description'),
       imagePaths: paths.map((item) => item as String).toList(),
+      basePrice: snapshot.get('basePrice'),
     );
   }
 
@@ -36,6 +39,7 @@ class Product {
       name: product.name,
       description: product.description,
       imagePaths: product.imagePaths,
+      basePrice: product.basePrice ?? 0,
     );
   }
 
