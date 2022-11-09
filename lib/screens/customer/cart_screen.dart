@@ -1,16 +1,17 @@
-import 'package:dev_store/models/hive/hive_product.dart';
 import 'package:dev_store/models/product.dart';
 import 'package:dev_store/services/cart_service.dart';
 import 'package:dev_store/widgets/customer/cart_list_item.dart';
-import 'package:dev_store/widgets/customer/product_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
+
+  void placeOrder() {
+    CartService().placeOrder(CartService().box.values.toList()).then((value) {
+      //todo some logic to clear your cart
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +19,15 @@ class CartScreen extends StatelessWidget {
       valueListenable: CartService.instance.box.listenable(),
       builder: (context, box, widget) {
         return box.values.isEmpty
-            ? Text('nothing in your cart')
+            ? const Text('nothing in your cart')
             : Column(
                 children: [
                   Expanded(
                     flex: 3,
                     child: ListView(
-                      children: box.values.toList().map(
-                        (e) {
-                          return CartListItem(Product.fromHive(e));
-                        },
-                      ).toList(),
+                      children: box.values.toList().map((e) {
+                        return CartListItem(Product.fromHive(e));
+                      }).toList(),
                     ),
                   ),
                   Expanded(
@@ -36,12 +35,14 @@ class CartScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
-                            print("make order");
-                          },
-                          child: Text("order"),
+                          onPressed: () => placeOrder(),
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green),
+                            backgroundColor: Colors.green,
+                          ),
+                          child: const Text(
+                            "order",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),

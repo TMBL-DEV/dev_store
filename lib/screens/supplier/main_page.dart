@@ -1,6 +1,8 @@
+import 'package:dev_store/screens/supplier/overview_screen.dart';
 import 'package:dev_store/screens/supplier/profile_screen.dart';
 import 'package:dev_store/widgets/appbar.dart';
 import 'package:dev_store/widgets/default_page_container.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SupplierMainPage extends StatefulWidget {
@@ -12,7 +14,32 @@ class SupplierMainPage extends StatefulWidget {
 
 class _SupplierMainPageState extends State<SupplierMainPage> {
   int _selectedIndex = 0;
-  final List<Widget?> tabs = [const Text('sup'), const ProfileScreen()];
+  final List<Widget?> tabs = [const OverviewScreen(), const ProfileScreen()];
+
+  late User authUser;
+  bool loggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    authStateCheck();
+  }
+
+  void authStateCheck() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      setState(() {
+        if (user != null) {
+          authUser = user;
+        }
+
+        loggedIn = user != null;
+
+        if (!loggedIn) {
+          Navigator.pushNamed(context, '/auth');
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +56,8 @@ class _SupplierMainPageState extends State<SupplierMainPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Category',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         onTap: (index) {

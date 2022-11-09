@@ -1,6 +1,7 @@
 import 'package:dev_store/screens/customer/cart_screen.dart';
 import 'package:dev_store/screens/customer/home_screen.dart';
 import 'package:dev_store/screens/customer/profile_screen.dart';
+import 'package:dev_store/screens/customer/supplier_screen.dart';
 import 'package:dev_store/widgets/appbar.dart';
 import 'package:dev_store/widgets/default_page_container.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _CustomerMainPageState extends State<CustomerMainPage> {
   int _selectedIndex = 0;
   final List<Widget?> tabs = [
     const HomeScreen(),
-    const Text('suppliers'),
+    const SupplierScreen(),
     const CartScreen(),
     const ProfileScreen()
   ];

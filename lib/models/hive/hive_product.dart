@@ -29,5 +29,15 @@ class HiveProduct extends HiveObject {
     return _id;
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "id": _id,
+      "name": name,
+      "description": description,
+      "basePrice": basePrice,
+      "amountInCart": amountInCart
+    };
+  }
+
   // Float
 }

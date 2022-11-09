@@ -1,7 +1,9 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dev_store/models/hive/hive_product.dart';
 import 'package:dev_store/models/product.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 
 class CartService {
@@ -48,5 +50,17 @@ class CartService {
     //   totalPrice += element.
     // });
     return 0.00;
+  }
+
+  Future<String> placeOrder(List<HiveProduct> products) async {
+    return (await FirebaseFirestore.instance.collection('orders').add({
+      'userId': FirebaseAuth.instance.currentUser?.uid,
+      'lines': products.map((prod) {
+        return prod.toJson();
+      }).toList(),
+      'paymentState': 'OPEN',
+      'paid_at': DateTime.now().toUtc(),
+    }))
+        .id;
   }
 }

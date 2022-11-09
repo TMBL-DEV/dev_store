@@ -86,9 +86,11 @@ class RegisterFormState extends State<RegisterForm> {
                   }
                   // If the form is valid, display a snackbar. In the real world,
                   // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(result),
-                  ));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(result),
+                    ),
+                  );
                 }
               },
               child: const Text('Submit'),

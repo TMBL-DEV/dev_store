@@ -3,8 +3,6 @@ import 'package:dev_store/widgets/auth/login_form.dart';
 import 'package:dev_store/widgets/auth/register_form.dart';
 import 'package:dev_store/widgets/default_page_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
